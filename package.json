@@ -1,0 +1,10 @@
+{
+  "name": "git-clean-branches",
+  "version": "1.0.0",
+  "description": "CLI to delete all local git branches except specified ones",
+  "bin": {
+    "git-clean": "./bin/git-clean.js"
+  },
+  "type": "module",
+  "license": "MIT"
+}
