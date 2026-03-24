@@ -16,7 +16,7 @@ for (const arg of args) {
 }
 
 if (keepBranches.length === 0) {
-  console.log("❌ Usage: git-clean [--dry-run] [--force] main develop");
+  console.log("Usage: git-clean [--dry-run] [--force] main develop");
   process.exit(1);
 }
 
@@ -27,7 +27,7 @@ const currentBranch = execSync(
 
 keepBranches.push(currentBranch);
 
-console.log("👉 Keeping branches:", keepBranches.join(", "));
+console.log("Keeping branches:", keepBranches.join(", "));
 console.log("");
 
 // Get all branches
@@ -44,22 +44,22 @@ const toDelete = branches.filter(
 );
 
 if (toDelete.length === 0) {
-  console.log("✅ Nothing to delete");
+  console.log("Nothing to delete");
   process.exit(0);
 }
 
-console.log("🧹 Branches to delete:");
+console.log("Branches to delete:");
 console.log(toDelete.join("\n"));
 console.log("");
 
 if (dryRun) {
-  console.log("🔍 Dry run — nothing deleted");
+  console.log("Dry run — nothing deleted");
   process.exit(0);
 }
 
 // Confirm
 process.stdout.write(
-  "⚠️  Are you sure you want to delete these branches? (y/N): "
+  "Are you sure you want to delete these branches? (y/N): "
 );
 
 process.stdin.setEncoding("utf8");
@@ -67,17 +67,17 @@ process.stdin.once("data", (data) => {
   const input = data.trim().toLowerCase();
 
   if (input !== "y") {
-    console.log("❌ Aborted");
+    console.log("Aborted");
     process.exit(0);
   }
 
   const flag = force ? "-D" : "-d";
 
   for (const branch of toDelete) {
-    console.log(`🗑 Deleting ${branch}`);
+    console.log(`Deleting ${branch}`);
     execSync(`git branch ${flag} ${branch}`, { stdio: "inherit" });
   }
 
-  console.log("\n✅ Done cleaning branches");
+  console.log("\nDone cleaning branches");
   process.exit(0);
 });
